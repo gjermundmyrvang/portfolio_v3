@@ -215,13 +215,6 @@ Creates a storage bucket named "posts" and configures access controls: anyone (a
 insert into storage.buckets (id, name, public)
 values ('posts', 'posts', true);
 
--- Allow anyone to read/download files
-create policy "public can read posts bucket"
-on storage.objects
-for select
-to anon, authenticated
-using (bucket_id = 'posts');
-
 -- Allow admins to upload files
 create policy "admin can upload to posts bucket"
 on storage.objects
