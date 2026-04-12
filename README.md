@@ -206,6 +206,53 @@ before update on public.posts
 for each row execute function public.set_updated_at();
 ```
 
+### 5. Create bucket `posts` for storing images
+
+Creates a storage bucket named "posts" and configures access controls: anyone (anon or authenticated) can read objects in the bucket, while only admins can upload, update, or delete files.
+
+```sql
+-- Create the bucket
+insert into storage.buckets (id, name, public)
+values ('posts', 'posts', true);
+
+-- Allow anyone to read/download files
+create policy "public can read posts bucket"
+on storage.objects
+for select
+to anon, authenticated
+using (bucket_id = 'posts');
+
+-- Allow admins to upload files
+create policy "admin can upload to posts bucket"
+on storage.objects
+for insert
+to authenticated
+with check (
+  bucket_id = 'posts'
+  and public.is_admin()
+);
+
+-- Allow admins to update files
+create policy "admin can update posts bucket"
+on storage.objects
+for update
+to authenticated
+using (
+  bucket_id = 'posts'
+  and public.is_admin()
+);
+
+-- Allow admins to delete files
+create policy "admin can delete from posts bucket"
+on storage.objects
+for delete
+to authenticated
+using (
+  bucket_id = 'posts'
+  and public.is_admin()
+);
+```
+
 ---
 
 ## Database Schema
