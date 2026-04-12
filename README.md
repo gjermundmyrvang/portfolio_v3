@@ -27,8 +27,8 @@ A minimal, self-hosted CMS for managing markdown-based content. Built with Next.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/markdown-cms.git
-cd markdown-cms
+git clone https://github.com/gjermundmyrvang/md-cms
+cd md-cms
 ```
 
 ### 2. Install dependencies
