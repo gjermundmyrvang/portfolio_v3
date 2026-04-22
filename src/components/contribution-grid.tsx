@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface ContributionDay {
   date: string;
@@ -42,15 +42,26 @@ function formatDate(dateStr: string): string {
 }
 
 export default function ContributionGrid({ weeks }: Props) {
+  const gridRef = useRef<HTMLDivElement>(null);
+
   const [tooltip, setTooltip] = useState<{
     text: string;
     x: number;
     y: number;
   } | null>(null);
 
+  useEffect(() => {
+    if (gridRef.current) {
+      gridRef.current.scrollLeft = gridRef.current.scrollWidth;
+    }
+  }, [weeks]);
+
   return (
     <div className="relative">
-      <div className="contribution-scroll flex gap-0.75 overflow-x-scroll pb-2">
+      <div
+        ref={gridRef}
+        className="contribution-scroll flex gap-0.75 overflow-x-scroll pb-2"
+      >
         {weeks.map((week, weekIndex) => (
           <div key={weekIndex} className="flex flex-col gap-0.75">
             {week.contributionDays.map((day) => (
