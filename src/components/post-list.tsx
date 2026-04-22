@@ -50,11 +50,11 @@ function PostRow({ post }: { post: Post }) {
       className="group flex items-start justify-between gap-4 py-3 border-b border-neutral-100 hover:border-neutral-300 transition-colors"
     >
       <div className="flex flex-col gap-0.5">
-        <span className="text-sm font-medium">{post.title || post.slug}</span>
+        <p className="text-sm font-medium">{post.title || post.slug}</p>
         {post.summary && (
-          <span className="text-sm text-neutral-500 line-clamp-1">
+          <p className="text-xs text-neutral-500 line-clamp-1">
             {post.summary}
-          </span>
+          </p>
         )}
       </div>
       {date && (
@@ -77,48 +77,48 @@ function PostRowAdmin({ post, deletePost }: PostRowAdminProps) {
   return (
     <div className="group flex items-start justify-between gap-4 py-3 border-b border-neutral-100 hover:border-neutral-300 transition-colors">
       <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-        <span className="text-sm font-medium line-clamp-1">
+        <p className="text-sm font-medium line-clamp-1">
           {post.title || post.slug}
-        </span>
+        </p>
         {post.summary && (
-          <span className="text-sm text-neutral-500 line-clamp-1">
+          <p className="text-xs text-neutral-500 line-clamp-1">
             {post.summary}
-          </span>
+          </p>
         )}
       </div>
       <div className="flex flex-col gap-2">
         {date && (
-          <p className="text-xs text-neutral-400 whitespace-nowrap text-end">
+          <pre className="text-xs text-neutral-400 whitespace-nowrap text-end">
             {date}
-          </p>
+          </pre>
         )}
         <div className="flex items-center gap-3 shrink-0">
           <Link
             href={`/admin/posts/${post.slug}/edit`}
-            className="text-xs text-gray-500 hover:text-black inline-flex items-center gap-1"
+            className="text-xs text-gray-500 hover:text-blue-600 inline-flex items-center gap-1"
           >
-            <span>
-              <Pen />
+            <Pen size={16} />
+            <span className="hidden sm:block">
+              <pre>Edit</pre>
             </span>
-            <span className="hidden sm:block">Edit</span>
           </Link>
           <Link
             href={`/posts/${post.slug}`}
-            className="text-xs text-gray-500 hover:text-black inline-flex items-center gap-1"
+            className="text-xs text-gray-500 hover:text-blue-600 inline-flex items-center gap-1"
           >
-            <span>
-              <Newspaper />
+            <Newspaper size={16} />
+            <span className="hidden sm:block">
+              <pre>View</pre>
             </span>
-            <span className="hidden sm:block">View</span>
           </Link>
           <button
             onClick={() => deletePost(post.id)}
             className="text-gray-500 hover:text-red-500 hover:cursor-pointer text-xs inline-flex items-center gap-1"
           >
-            <span>
-              <Trash />
+            <Trash size={16} />
+            <span className="hidden sm:block">
+              <pre>Delete</pre>
             </span>
-            <span className="hidden sm:block">Delete</span>
           </button>
         </div>
       </div>
