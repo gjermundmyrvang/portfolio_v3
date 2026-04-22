@@ -14,9 +14,10 @@ type PostFormProps = {
 
 const FOLDERS = [
   // Add or change folders here
-  "Folder 1",
-  "Folder 2",
-  "Folder 3",
+  "arduinopage",
+  "airbornwx",
+  "creativedataviz",
+  "airbornschool",
 ];
 
 const MD_PLACEHOLDER = `Write content in markdown syntax

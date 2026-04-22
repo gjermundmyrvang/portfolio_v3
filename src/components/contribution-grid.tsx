@@ -17,7 +17,7 @@ interface Props {
 }
 
 function getColor(count: number): string {
-  if (count === 0) return "bg-transparent border border-neutral-400";
+  if (count === 0) return "bg-neutral-100 border border-neutral-200";
   if (count <= 3) return "bg-emerald-900";
   if (count <= 6) return "bg-emerald-700";
   if (count <= 9) return "bg-emerald-500";
@@ -42,13 +42,13 @@ export default function ContributionGrid({ weeks }: Props) {
 
   return (
     <div className="relative">
-      <div className="flex gap-0.75">
+      <div className="contribution-scroll flex gap-0.75 overflow-x-scroll pb-2">
         {weeks.map((week, weekIndex) => (
           <div key={weekIndex} className="flex flex-col gap-0.75">
             {week.contributionDays.map((day) => (
               <div
                 key={day.date}
-                className={`h-2.5 w-2.5 rounded-sm ${getColor(day.contributionCount)} cursor-pointer transition-opacity hover:opacity-75`}
+                className={`h-2.5 w-2.5 ${getColor(day.contributionCount)} cursor-pointer transition-opacity hover:opacity-75`}
                 onMouseEnter={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
                   const parent = e.currentTarget
@@ -57,8 +57,8 @@ export default function ContributionGrid({ weeks }: Props) {
                   setTooltip({
                     text:
                       day.contributionCount === 0
-                        ? `Ingen bidrag – ${formatDate(day.date)}`
-                        : `${day.contributionCount} bidrag – ${formatDate(day.date)}`,
+                        ? `No contributions ${formatDate(day.date)}`
+                        : `${day.contributionCount} contributions ${formatDate(day.date)}`,
                     x: rect.left - parent.left + rect.width / 2,
                     y: rect.top - parent.top,
                   });
@@ -68,6 +68,17 @@ export default function ContributionGrid({ weeks }: Props) {
             ))}
           </div>
         ))}
+      </div>
+      <div className="flex items-center gap-2 mt-2">
+        <span className="text-[10px] uppercase tracking-widest text-neutral-400">
+          Less
+        </span>
+        {[0, 1, 4, 7, 10].map((count) => (
+          <div key={count} className={`h-2.5 w-2.5 ${getColor(count)}`} />
+        ))}
+        <span className="text-[10px] uppercase tracking-widest text-neutral-400">
+          More
+        </span>
       </div>
 
       {tooltip && (

@@ -18,8 +18,11 @@ export default function PostsSection() {
 
   return (
     <>
-      {featured.length > 0 && <PostList posts={featured} title="Featured" />}
-      {rest.length > 0 && <PostList posts={rest} title="Posts" />}
+      <h2 className="text-3xl">Projects</h2>
+      {featured.length > 0 && (
+        <PostList posts={featured} title="Featured Projects" />
+      )}
+      {rest.length > 0 && <PostList posts={rest} title="Projects" />}
       {posts.length === 0 && (
         <p className="text-sm text-neutral-400">No posts yet.</p>
       )}
