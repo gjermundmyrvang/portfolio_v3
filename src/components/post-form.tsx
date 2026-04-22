@@ -18,6 +18,7 @@ const FOLDERS = [
   "airbornwx",
   "creativedataviz",
   "airbornschool",
+  "rapidproject",
 ];
 
 const MD_PLACEHOLDER = `Write content in markdown syntax
