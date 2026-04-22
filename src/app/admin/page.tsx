@@ -25,7 +25,7 @@ export default function AdminPage() {
         <div className="flex items-center justify-end">
           <Link
             href="/admin/posts/new"
-            className="bg-black text-white px-4 py-2 text-sm flex items-center gap-2 hover:cursor-pointer hover:shadow-2xl transition-shadow"
+            className="bg-black text-white px-4 py-2 text-sm flex items-center gap-2 hover:cursor-pointer hover:shadow-2xl transition-shadow dark:invert"
           >
             <Plus size={22} />
             <span className="hidden sm:block">
