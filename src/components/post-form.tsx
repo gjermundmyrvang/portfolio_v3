@@ -149,13 +149,15 @@ export default function PostForm({ post }: PostFormProps) {
         {isEditing ? "Edit Post" : "New Post"}
       </h1>
 
-      <label className="text-lg text-neutral-600">Add post details</label>
+      <label className="text-lg text-neutral-600 dark:text-neutral-300">
+        Add post details
+      </label>
       <input
         name="title"
         placeholder="Title"
         value={fields.title}
         onChange={handleChange}
-        className="border border-neutral-200 px-3 py-2 rounded"
+        className="border border-neutral-200 dark:border-neutral-700 px-3 py-2 rounded"
         required
       />
       <input
@@ -163,7 +165,7 @@ export default function PostForm({ post }: PostFormProps) {
         placeholder="Slug"
         value={fields.slug}
         onChange={handleChange}
-        className="border border-neutral-200 px-3 py-2 rounded"
+        className="border border-neutral-200 dark:border-neutral-700 px-3 py-2 rounded"
         required
       />
       <input
@@ -171,19 +173,21 @@ export default function PostForm({ post }: PostFormProps) {
         placeholder="Summary (optional)"
         value={fields.summary}
         onChange={handleChange}
-        className="border border-neutral-200 px-3 py-2 rounded"
+        className="border border-neutral-200 dark:border-neutral-700 px-3 py-2 rounded"
       />
       <div>
-        <label className="text-lg text-neutral-600">Add content</label>
-        <div className="flex items-center justify-between border-b border-neutral-300 py-2">
+        <label className="text-lg text-neutral-600 dark:text-neutral-300">
+          Add content
+        </label>
+        <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-700 py-2">
           <div className="flex gap-1">
             <button
               type="button"
               onClick={() => setMdTab("write")}
-              className={`px-3 py-1 text-sm ${
+              className={`px-3 py-1 text-sm hover:cursor-pointer ${
                 mdTab === "write"
                   ? "bg-neutral-900 text-white"
-                  : "hover:bg-neutral-100"
+                  : "hover:bg-neutral-100 dark:hover:bg-neutral-700"
               }`}
             >
               Write
@@ -191,10 +195,10 @@ export default function PostForm({ post }: PostFormProps) {
             <button
               type="button"
               onClick={() => setMdTab("preview")}
-              className={`px-3 py-1 text-sm ${
+              className={`px-3 py-1 text-sm hover:cursor-pointer ${
                 mdTab === "preview"
                   ? "bg-neutral-900 text-white"
-                  : "hover:bg-neutral-100"
+                  : "hover:bg-neutral-100 dark:hover:bg-neutral-700"
               }`}
             >
               Preview
@@ -204,7 +208,7 @@ export default function PostForm({ post }: PostFormProps) {
         </div>
         <button
           onClick={() => setImageModalOpen(true)}
-          className="flex mt-2 items-center gap-2 border px-3 py-2 rounded text-sm text-neutral-600 hover:bg-neutral-50 hover:cursor-pointer"
+          className="flex mt-2 items-center gap-2 border border-neutral-200 dark:border-neutral-700 px-3 py-2 rounded text-sm text-neutral-600 hover:bg-neutral-50 hover:cursor-pointer dark:hover:bg-neutral-700 dark:text-neutral-300"
         >
           <ImageIcon className="w-4 h-4" />
           Insert image
@@ -218,7 +222,7 @@ export default function PostForm({ post }: PostFormProps) {
             onChange={handleChange}
             onKeyDown={handleMarkdownKeyDown}
             rows={12}
-            className="mt-2 border border-neutral-200 px-3 py-2 rounded font-mono text-sm w-full"
+            className="mt-2 border border-neutral-200 dark:border-neutral-700 px-3 py-2 rounded font-mono text-sm w-full"
           />
         ) : (
           <div className="mt-2">
@@ -227,7 +231,7 @@ export default function PostForm({ post }: PostFormProps) {
         )}
       </div>
       <div
-        className={`flex items-center ps-4 border rounded shadow-xs ${fields.featured ? "border-green-400 bg-green-300" : "bg-neutral-100 border-neutral-200"}`}
+        className={`flex items-center ps-4 border rounded shadow-xs ${fields.featured ? "border-green-400 bg-green-300" : "bg-neutral-100 border-neutral-200 dark:bg-neutral-800 dark:border-neutral-700"}`}
       >
         <input
           id="checkbox"
@@ -259,9 +263,9 @@ export default function PostForm({ post }: PostFormProps) {
             e.target === e.currentTarget && setImageModalOpen(false)
           }
         >
-          <div className="bg-white rounded-xl border w-full max-w-md mx-4 overflow-hidden shadow-lg">
+          <div className="bg-background rounded-xl border dark:border-neutral-700 w-full max-w-md mx-4 overflow-hidden shadow-lg">
             {/* Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b">
+            <div className="flex items-center justify-between px-4 py-3 border-b dark:border-neutral-700">
               <h2 className="text-sm font-medium">
                 Insert image into markdown
               </h2>
@@ -278,7 +282,7 @@ export default function PostForm({ post }: PostFormProps) {
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs text-neutral-500">Alt text</label>
                 <input
-                  className="border px-3 py-2 rounded text-sm"
+                  className="border dark:border-neutral-700 px-3 py-2 rounded text-sm"
                   required
                   value={uploadAlt}
                   onChange={(e) => setUploadAlt(e.target.value)}
@@ -289,7 +293,7 @@ export default function PostForm({ post }: PostFormProps) {
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs text-neutral-500">Folder</label>
                 <select
-                  className="border px-3 py-2 rounded text-sm"
+                  className="border dark:border-neutral-700 px-3 py-2 rounded text-sm"
                   value={uploadFolder}
                   onChange={(e) => setUploadFolder(e.target.value)}
                 >
@@ -305,16 +309,16 @@ export default function PostForm({ post }: PostFormProps) {
             </div>
 
             {/* Footer */}
-            <div className="flex justify-end gap-2 px-4 py-3 border-t">
+            <div className="flex justify-end gap-2 px-4 py-3 border-t dark:border-neutral-700">
               <button
                 onClick={() => setImageModalOpen(false)}
-                className="border px-3 py-2 rounded text-sm"
+                className="border dark:border-neutral-700 px-3 py-2 rounded text-sm hover:cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 disabled={uploading}
-                className="bg-neutral-900 text-white px-3 py-2 rounded text-sm disabled:opacity-50"
+                className="bg-neutral-900 dark:bg-green-900 text-white px-3 py-2 rounded text-sm disabled:opacity-50 hover:cursor-pointer"
               >
                 {uploading ? "Uploading..." : "Upload"}
               </button>
@@ -326,7 +330,7 @@ export default function PostForm({ post }: PostFormProps) {
       <button
         onClick={handleSubmit}
         disabled={loading}
-        className="bg-black text-white py-2 rounded hover:cursor-pointer"
+        className="bg-black text-white py-2 rounded hover:cursor-pointer dark:bg-transparent dark:border dark:border-neutral-700 dark:hover:bg-neutral-700 transition-colors"
       >
         {loading ? "Saving..." : isEditing ? "Update Post" : "Create Post"}
       </button>
