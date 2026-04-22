@@ -1,20 +1,8 @@
-"use client";
-import { PostList } from "../components/post-list";
-import { usePosts } from "../hooks/usePosts";
+import { Suspense } from "react";
+import ContributionGraph from "../components/contribution-graph";
+import PostsSection from "../components/post-section";
 
 export default function Home() {
-  const { posts, loading, error } = usePosts();
-
-  if (error)
-    return (
-      <p className="text-sm text-red-500 p-8">Failed to load posts: {error}</p>
-    );
-  if (loading || !posts)
-    return <p className="text-sm text-neutral-400 p-8">Loading...</p>;
-
-  const featured = posts.filter((p) => p.featured);
-  const rest = posts.filter((p) => !p.featured);
-
   return (
     <div className="max-w-2xl mx-auto px-6 py-16 flex flex-col gap-12">
       <div className="flex flex-col gap-1">
@@ -27,13 +15,15 @@ export default function Home() {
         </p>
       </div>
 
-      {featured.length > 0 && <PostList posts={featured} title="Featured" />}
+      <Suspense
+        fallback={
+          <div className="h-20 animate-pulse rounded-lg bg-neutral-800" />
+        }
+      >
+        <ContributionGraph />
+      </Suspense>
 
-      {rest.length > 0 && <PostList posts={rest} title="Posts" />}
-
-      {posts.length === 0 && (
-        <p className="text-sm text-neutral-400">No posts yet.</p>
-      )}
+      <PostsSection />
     </div>
   );
 }
