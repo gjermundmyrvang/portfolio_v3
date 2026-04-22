@@ -22,18 +22,15 @@ export default function AdminPage() {
   return (
     <div className="">
       <div className="flex flex-col gap-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-semibold line-clamp-1">
-            Edit / View / Delete Posts
-          </h1>
+        <div className="flex items-center justify-end">
           <Link
             href="/admin/posts/new"
-            className="bg-black text-white px-4 py-2 rounded text-sm flex items-center gap-2 hover:cursor-pointer hover:shadow-2xl transition-shadow"
+            className="bg-black text-white px-4 py-2 text-sm flex items-center gap-2 hover:cursor-pointer hover:shadow-2xl transition-shadow"
           >
-            <span>
-              <Plus />
+            <Plus size={22} />
+            <span className="hidden sm:block">
+              <pre>New Post</pre>
             </span>
-            <span className="hidden sm:block">New Post</span>
           </Link>
         </div>
 
