@@ -4,6 +4,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --scrollbar-thumb: #d4d4d4;
+  --scrollbar-thumb-hover: #a3a3a3;
 }
 
 @theme inline {
@@ -16,8 +18,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #111111;
+    --foreground: #d7d7d7;
+    --scrollbar-thumb: #974200;
+    --scrollbar-thumb-hover: #d05a00;
   }
 }
 
@@ -47,7 +51,7 @@ kbd {
 }
 
 .contribution-scroll::-webkit-scrollbar {
-  height: 3px;
+  height: 4px;
 }
 
 .contribution-scroll::-webkit-scrollbar-track {
@@ -56,10 +60,11 @@ kbd {
 }
 
 .contribution-scroll::-webkit-scrollbar-thumb {
-  background: #404040;
+  background: var(--scrollbar-thumb);
   border-radius: 0px;
 }
 
 .contribution-scroll::-webkit-scrollbar-thumb:hover {
-  background: #737373;
+  background: var(--scrollbar-thumb-hover);
+  cursor: pointer;
 }
