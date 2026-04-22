@@ -12,6 +12,7 @@ const jetMono = JetBrains_Mono({
 const russo = Russo_One({
   variable: "--font-russo",
   weight: "400",
+  subsets: ["latin"],
 });
 
 const inter = Inter({
