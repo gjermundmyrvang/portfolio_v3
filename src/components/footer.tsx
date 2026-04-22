@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="flex flex-col items-center gap-4">
         <nav className="flex items-center gap-6">
           {/* Page Nav */}
-          {path !== "/" && (
+          {path === "/admin" || path === "/login" ? (
             <Link
               href="/"
               className="flex items-center gap-2 hover:text-neutral-900 transition"
@@ -18,8 +18,7 @@ export default function Footer() {
               <House size={16} />
               <span>Home</span>
             </Link>
-          )}
-          {path !== "/admin" && (
+          ) : (
             <Link
               href="/admin"
               className="flex items-center gap-2 hover:text-neutral-900 transition"
