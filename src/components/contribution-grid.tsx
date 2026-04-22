@@ -18,10 +18,10 @@ interface Props {
 
 const palette = [
   "bg-neutral-100 border border-neutral-200",
-  "bg-indigo-900",
-  "bg-indigo-700",
-  "bg-indigo-500",
-  "bg-indigo-300",
+  "bg-emerald-900",
+  "bg-emerald-700",
+  "bg-emerald-500",
+  "bg-emerald-300",
 ];
 
 function getColor(count: number): string {
