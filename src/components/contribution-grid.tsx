@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Marquee from "react-fast-marquee";
 
 interface ContributionDay {
   date: string;
@@ -42,52 +43,44 @@ function formatDate(dateStr: string): string {
 }
 
 export default function ContributionGrid({ weeks }: Props) {
-  const gridRef = useRef<HTMLDivElement>(null);
-
   const [tooltip, setTooltip] = useState<{
     text: string;
     x: number;
     y: number;
   } | null>(null);
 
-  useEffect(() => {
-    if (gridRef.current) {
-      gridRef.current.scrollLeft = gridRef.current.scrollWidth;
-    }
-  }, [weeks]);
-
   return (
     <div className="relative">
-      <div
-        ref={gridRef}
-        className="contribution-scroll flex gap-0.75 overflow-x-scroll pb-2"
-      >
-        {weeks.map((week, weekIndex) => (
-          <div key={weekIndex} className="flex flex-col gap-0.75">
-            {week.contributionDays.map((day) => (
-              <div
-                key={day.date}
-                className={`h-2.5 w-2.5 ${getColor(day.contributionCount)} cursor-pointer transition-opacity hover:opacity-75`}
-                onMouseEnter={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const parent = e.currentTarget
-                    .closest(".relative")!
-                    .getBoundingClientRect();
-                  setTooltip({
-                    text:
-                      day.contributionCount === 0
-                        ? `No contributions ${formatDate(day.date)}`
-                        : `${day.contributionCount} contributions ${formatDate(day.date)}`,
-                    x: rect.left - parent.left + rect.width / 2,
-                    y: rect.top - parent.top,
-                  });
-                }}
-                onMouseLeave={() => setTooltip(null)}
-              />
-            ))}
-          </div>
-        ))}
-      </div>
+      <Marquee speed={30} pauseOnHover gradient={false} loop={0}>
+        <div className="flex gap-0.75">
+          {weeks.map((week, weekIndex) => (
+            <div key={weekIndex} className="flex flex-col gap-0.75">
+              {week.contributionDays.map((day) => (
+                <div
+                  key={day.date}
+                  className={`h-3.5 w-3.5 ${getColor(day.contributionCount)} cursor-pointer transition-opacity hover:opacity-75`}
+                  onMouseEnter={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const parent = e.currentTarget
+                      .closest(".relative")!
+                      .getBoundingClientRect();
+                    setTooltip({
+                      text:
+                        day.contributionCount === 0
+                          ? `No contributions ${formatDate(day.date)}`
+                          : `${day.contributionCount} contributions ${formatDate(day.date)}`,
+                      x: rect.left - parent.left + rect.width / 2,
+                      y: rect.top - parent.top,
+                    });
+                  }}
+                  onMouseLeave={() => setTooltip(null)}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+      </Marquee>
+
       <div className="flex items-center gap-2 mt-2">
         <span className="text-[10px] uppercase tracking-widest text-neutral-400">
           Less
