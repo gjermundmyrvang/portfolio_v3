@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Marquee from "react-fast-marquee";
+import { useState } from "react";
+import CustomMarquee from "./custom-marquee";
 
 interface ContributionDay {
   date: string;
@@ -51,14 +51,14 @@ export default function ContributionGrid({ weeks }: Props) {
 
   return (
     <div className="relative">
-      <Marquee speed={30} pauseOnHover gradient={false} loop={0}>
+      <CustomMarquee>
         <div className="flex gap-0.75">
           {weeks.map((week, weekIndex) => (
             <div key={weekIndex} className="flex flex-col gap-0.75">
               {week.contributionDays.map((day) => (
                 <div
                   key={day.date}
-                  className={`h-3.5 w-3.5 ${getColor(day.contributionCount)} cursor-pointer transition-opacity hover:opacity-75`}
+                  className={`h-4 w-4 ${getColor(day.contributionCount)} cursor-pointer transition-opacity hover:opacity-75`}
                   onMouseEnter={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
                     const parent = e.currentTarget
@@ -79,7 +79,7 @@ export default function ContributionGrid({ weeks }: Props) {
             </div>
           ))}
         </div>
-      </Marquee>
+      </CustomMarquee>
 
       <div className="flex items-center gap-2 mt-2">
         <span className="text-[10px] uppercase tracking-widest text-neutral-400">
