@@ -47,7 +47,7 @@ function PostRow({ post }: { post: Post }) {
   return (
     <Link
       href={`/posts/${post.slug}`}
-      className="group flex items-start justify-between gap-4 py-3 border-b border-neutral-100 hover:border-neutral-300 transition-colors"
+      className="group flex items-start justify-between gap-4 py-3 border-b border-neutral-100 hover:border-neutral-300 dark:border-neutral-800 dark:hover:border-neutral-500 transition-colors"
     >
       <div className="flex flex-col gap-0.5">
         <p className="text-sm font-medium">{post.title || post.slug}</p>
@@ -75,7 +75,7 @@ function PostRowAdmin({ post, deletePost }: PostRowAdminProps) {
   const date = formatDate(post.created_at);
 
   return (
-    <div className="group flex items-start justify-between gap-4 py-3 border-b border-neutral-100 hover:border-neutral-300 transition-colors">
+    <div className="group flex items-start justify-between gap-4 py-3 border-b border-neutral-100 hover:border-neutral-300 dark:border-neutral-800 dark:hover:border-neutral-500 transition-colors">
       <div className="flex flex-col gap-0.5 flex-1 min-w-0">
         <p className="text-sm font-medium line-clamp-1">
           {post.title || post.slug}

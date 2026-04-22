@@ -159,7 +159,7 @@ export default function CircuitBackground() {
         className="absolute inset-0"
         style={{ filter: "blur(0.8px)" }}
       />
-      <div className="absolute inset-0 bg-white/72" />
+      <div className="absolute inset-0 bg-white/72 dark:bg-black/70" />
     </div>
   );
 }

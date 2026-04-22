@@ -17,7 +17,7 @@ interface Props {
 }
 
 const palette = [
-  "bg-neutral-100 border border-neutral-200",
+  "bg-neutral-100 dark:bg-transparent border border-neutral-200 dark:border-neutral-700",
   "bg-emerald-900",
   "bg-emerald-700",
   "bg-emerald-500",

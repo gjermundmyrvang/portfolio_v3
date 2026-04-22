@@ -28,26 +28,34 @@ export default function AdminLogin() {
   return (
     <div className="flex items-center justify-center">
       <div className="flex flex-col gap-4 w-full max-w-xs">
-        <h1 className="text-xl font-semibold">Admin Login</h1>
+        <h1 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+          Admin Login
+        </h1>
+
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border px-3 py-2 rounded"
+          className="border dark:border-neutral-700 px-3 py-2 rounded text-sm"
         />
+
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border px-3 py-2 rounded"
+          className="border dark:border-neutral-700 px-3 py-2 rounded text-sm"
         />
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+
+        {error && (
+          <p className="text-red-500 dark:text-red-400 text-sm">{error}</p>
+        )}
+
         <button
           onClick={handleLogin}
           disabled={loading}
-          className="bg-black text-white py-2 rounded"
+          className="bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 py-2 rounded hover:opacity-90 transition disabled:opacity-50 hover:cursor-pointer"
         >
           {loading ? "Logging in..." : "Login"}
         </button>

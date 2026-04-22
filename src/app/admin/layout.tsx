@@ -32,7 +32,7 @@ export default function AdminLayout({
 
   return (
     <div>
-      <header className="border-b border-neutral-300 py-4 px-2 sm:px-0 text-sm font-medium flex justify-between">
+      <header className="border-b border-neutral-300 dark:border-neutral-700 py-4 px-2 sm:px-0 text-sm font-medium flex justify-between">
         <span>
           <pre className="text-xl font-bold">Admin Page</pre>
           {!(user.trim() === "") && (
