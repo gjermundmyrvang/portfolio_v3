@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Blog Page",
-  description: "Created for tutorial",
+  title: "Gjermund Portfolio",
+  description: "By Gjermund Persson Myrvang",
 };
 
 export default function RootLayout({
