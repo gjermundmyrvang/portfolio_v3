@@ -6,10 +6,8 @@ export default function Home() {
   return (
     <div className="max-w-2xl mx-auto px-6 py-16 flex flex-col gap-12">
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-semibold tracking-tight">
-          Gjermund Persson Myrvang
-        </h1>
-        <p className="text-sm text-neutral-500">
+        <h1 className="text-4xl">Gjermund Persson Myrvang</h1>
+        <p className="text-sm text-neutral-500 pt-2 sm:p-0">
           Currently a master student at the department of informatics at
           University of Oslo
         </p>
