@@ -16,12 +16,20 @@ interface Props {
   weeks: ContributionWeek[];
 }
 
+const palette = [
+  "bg-neutral-100 border border-neutral-200",
+  "bg-indigo-900",
+  "bg-indigo-700",
+  "bg-indigo-500",
+  "bg-indigo-300",
+];
+
 function getColor(count: number): string {
-  if (count === 0) return "bg-neutral-100 border border-neutral-200";
-  if (count <= 3) return "bg-emerald-900";
-  if (count <= 6) return "bg-emerald-700";
-  if (count <= 9) return "bg-emerald-500";
-  return "bg-emerald-400";
+  if (count === 0) return palette[0];
+  if (count <= 3) return palette[1];
+  if (count <= 6) return palette[2];
+  if (count <= 9) return palette[3];
+  return palette[4];
 }
 
 function formatDate(dateStr: string): string {
