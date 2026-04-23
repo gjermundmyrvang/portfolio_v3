@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useMarkdownShortcuts } from "../hooks/use-md-shortcuts";
 import DropZoneInput from "./drop-zone";
 import Markdown from "./markdown";
-import { ImageIcon, Pin, PinOff, X } from "lucide-react";
+import { FileCheck, FileType, ImageIcon, Pin, PinOff, X } from "lucide-react";
 
 type PostFormProps = {
   post?: Post; // if provided = edit mode, if not = create mode
@@ -40,6 +40,7 @@ export default function PostForm({ post }: PostFormProps) {
     summary: post?.summary ?? "",
     content_md: post?.content_md ?? "",
     featured: post?.featured ?? false,
+    ongoing: post?.ongoing ?? false,
   });
 
   const { ref: contentRef, onKeyDown: handleMarkdownKeyDown } =
@@ -232,6 +233,34 @@ export default function PostForm({ post }: PostFormProps) {
           </div>
         )}
       </div>
+      {/* ONGOING */}
+      <div
+        className={`flex items-center ps-4 border rounded shadow-xs ${fields.ongoing ? "border-green-400 bg-green-300" : "bg-neutral-100 border-neutral-200 dark:bg-neutral-800 dark:border-neutral-700"}`}
+      >
+        <input
+          id="checkbox-ongoing"
+          type="checkbox"
+          name="ongoing"
+          checked={fields.ongoing}
+          onChange={handleChange}
+          className="accent-green-800"
+          disabled={fields.featured}
+        />
+        <label
+          htmlFor="checkbox-ongoing"
+          className={`inline-flex items-center gap-2 text-gray-500 select-none w-full py-4 ms-2 text-md font-medium hover:cursor-pointer ${fields.ongoing ? "text-green-800" : "text-gray-500"}`}
+        >
+          Ongoing
+          <span>
+            {fields.ongoing ? (
+              <FileType className="size-4" />
+            ) : (
+              <FileCheck className="size-4" />
+            )}
+          </span>
+        </label>
+      </div>
+      {/* FEATURED */}
       <div
         className={`flex items-center ps-4 border rounded shadow-xs ${fields.featured ? "border-green-400 bg-green-300" : "bg-neutral-100 border-neutral-200 dark:bg-neutral-800 dark:border-neutral-700"}`}
       >
@@ -242,6 +271,7 @@ export default function PostForm({ post }: PostFormProps) {
           checked={fields.featured}
           onChange={handleChange}
           className="accent-green-800"
+          disabled={fields.ongoing}
         />
         <label
           htmlFor="checkbox"
