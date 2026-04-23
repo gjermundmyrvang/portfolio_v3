@@ -19,6 +19,8 @@ const FOLDERS = [
   "creativedataviz",
   "airbornschool",
   "rapidproject",
+  "coffestats",
+  "hysj",
 ];
 
 const MD_PLACEHOLDER = `Write content in markdown syntax
