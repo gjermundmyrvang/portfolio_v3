@@ -15,7 +15,7 @@ export default function PostsSection() {
 
   const ongoing = posts.filter((p) => p.ongoing);
   const featured = posts.filter((p) => p.featured);
-  const rest = posts.filter((p) => !p.featured);
+  const rest = posts.filter((p) => !p.ongoing && !p.featured);
 
   return (
     <>
