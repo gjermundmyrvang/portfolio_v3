@@ -7,6 +7,7 @@ export type Post = {
   created_at: string;
   updated_at: string;
   featured: boolean;
+  ongoing: boolean;
 };
 
 export type PostField = {
@@ -15,4 +16,5 @@ export type PostField = {
   summary?: string;
   content_md: string;
   featured: boolean;
+  ongoing: boolean;
 };
