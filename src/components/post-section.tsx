@@ -13,12 +13,16 @@ export default function PostsSection() {
   if (loading || !posts)
     return <p className="text-sm text-neutral-400">Loading...</p>;
 
+  const ongoing = posts.filter((p) => p.ongoing);
   const featured = posts.filter((p) => p.featured);
   const rest = posts.filter((p) => !p.featured);
 
   return (
     <>
       <h2 className="text-3xl">Projects</h2>
+      {ongoing.length > 0 && (
+        <PostList posts={ongoing} title="Ongoing Projects" />
+      )}
       {featured.length > 0 && (
         <PostList posts={featured} title="Featured Projects" />
       )}
