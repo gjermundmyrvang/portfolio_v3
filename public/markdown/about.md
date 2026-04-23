@@ -1,7 +1,3 @@
-# Gjermund Persson Myrvang
-
-> Currently completing a Master's degree in Informatics at the University of Oslo's Department of Informatics
-
 ## About Me
 
 Master's student in Informatics at the University of Oslo, with a focus on
