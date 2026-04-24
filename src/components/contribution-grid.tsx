@@ -32,6 +32,10 @@ export default function ContributionGrid({
     y: number;
   } | null>(null);
 
+  const today = new Date().toISOString().slice(0, 10);
+  const isToday = (date: string): boolean =>
+    formatDate(date) === formatDate(today);
+
   const grid = (
     <div className={`flex gap-0.75 ${!marquee && "overflow-x-auto"}`}>
       {weeks.map((week, weekIndex) => (
@@ -39,7 +43,7 @@ export default function ContributionGrid({
           {week.contributionDays.map((day) => (
             <div
               key={day.date}
-              className={`h-4 w-4 ${getColor(day.contributionCount, palette)} cursor-pointer transition-opacity hover:opacity-75`}
+              className={`h-4 w-4 ${getColor(day.contributionCount, palette)} ${isToday(day.date) && "animate-pulse"} cursor-pointer transition-opacity hover:opacity-75`}
               onMouseEnter={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
                 const parent = e.currentTarget
