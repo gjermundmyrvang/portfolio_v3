@@ -5,6 +5,7 @@ import {
   ContributionWeek,
 } from "../types/graph-types";
 
+export const revalidate = 3600; // revalidate every hour
 export async function getCoffees(): Promise<ContributionData> {
   const { data, error } = await supabase
     .from("coffee_logs")
