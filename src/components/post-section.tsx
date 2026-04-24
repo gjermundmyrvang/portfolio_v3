@@ -19,7 +19,7 @@ export default function PostsSection() {
 
   return (
     <>
-      <h2 className="text-3xl">Projects</h2>
+      <h2 className="text-[1.5em] font-bold">Projects</h2>
       {ongoing.length > 0 && (
         <PostList posts={ongoing} title="Ongoing Projects" />
       )}
