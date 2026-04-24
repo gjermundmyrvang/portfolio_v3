@@ -1,21 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { ContributionData } from "../types/graph-types";
 import CustomMarquee from "./custom-marquee";
-
-interface ContributionDay {
-  date: string;
-  contributionCount: number;
-  color: string;
-}
-
-interface ContributionWeek {
-  contributionDays: ContributionDay[];
-}
-
-interface Props {
-  weeks: ContributionWeek[];
-}
 
 const palette = [
   "bg-neutral-100 dark:bg-transparent border border-neutral-200 dark:border-neutral-700",
@@ -42,7 +29,7 @@ function formatDate(dateStr: string): string {
   });
 }
 
-export default function ContributionGrid({ weeks }: Props) {
+export default function ContributionGrid({ weeks }: ContributionData) {
   const [tooltip, setTooltip] = useState<{
     text: string;
     x: number;

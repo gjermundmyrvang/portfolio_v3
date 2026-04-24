@@ -1,20 +1,7 @@
+import { ContributionData } from "../types/graph-types";
+
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME;
-
-interface ContributionDay {
-  date: string;
-  contributionCount: number;
-  color: string;
-}
-
-interface ContributionWeek {
-  contributionDays: ContributionDay[];
-}
-
-export interface ContributionData {
-  totalContributions: number;
-  weeks: ContributionWeek[];
-}
 
 export async function getGithubContributions(): Promise<ContributionData> {
   const query = `
