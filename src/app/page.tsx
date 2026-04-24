@@ -1,10 +1,11 @@
-import { Suspense } from "react";
-import ContributionGraph from "../components/contribution-graph";
-import PostsSection from "../components/post-section";
-import Markdown from "../components/markdown";
 import fs from "fs";
-import path from "path";
 import Image from "next/image";
+import path from "path";
+import { Suspense } from "react";
+import CoffeeGraph from "../components/coffee-graph";
+import ContributionGraph from "../components/contribution-graph";
+import Markdown from "../components/markdown";
+import PostsSection from "../components/post-section";
 
 export default function Home() {
   const filePath = path.join(process.cwd(), "public", "markdown", "about.md");
@@ -48,6 +49,14 @@ export default function Home() {
         </div>
       </div>
       <Markdown content={aboutMd} />
+
+      <Suspense
+        fallback={
+          <div className="h-20 animate-pulse rounded-lg bg-neutral-800" />
+        }
+      >
+        <CoffeeGraph />
+      </Suspense>
 
       <Suspense
         fallback={
