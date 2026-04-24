@@ -1,7 +1,7 @@
 export interface ContributionDay {
   date: string;
   contributionCount: number;
-  color: string;
+  color?: string;
 }
 
 export interface ContributionWeek {
@@ -11,4 +11,5 @@ export interface ContributionWeek {
 export interface ContributionData {
   totalContributions?: number;
   weeks: ContributionWeek[];
+  since?: Date;
 }
