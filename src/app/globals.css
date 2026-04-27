@@ -58,3 +58,16 @@ kbd {
 .contribution-scroll::-webkit-scrollbar {
   display: none;
 }
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+}
+.animate-wiggle {
+  animation: wiggle 1.5s ease-in-out infinite;
+}

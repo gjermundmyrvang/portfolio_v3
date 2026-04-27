@@ -43,7 +43,7 @@ export default function ContributionGrid({
           {week.contributionDays.map((day) => (
             <div
               key={day.date}
-              className={`h-4 w-4 ${getColor(day.contributionCount, palette)} ${isToday(day.date) && "animate-pulse"} cursor-pointer transition-opacity hover:opacity-75`}
+              className={`h-4 w-4 ${getColor(day.contributionCount, palette)} ${isToday(day.date) && "animate-wiggle shadow-lg"} cursor-pointer transition-opacity hover:opacity-75`}
               onMouseEnter={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
                 const parent = e.currentTarget
