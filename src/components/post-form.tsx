@@ -64,6 +64,31 @@ export default function PostForm({ post }: PostFormProps) {
     }
     fetchFolders();
   }, []);
+
+  async function addFolder() {
+    const name = newFolderName
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, "");
+    if (!name || folders.includes(name)) {
+      setError("Foldername can't be blank or reused");
+      return null;
+    }
+
+    const { error } = await supabase.from("post_folders").insert({ name });
+    if (error) {
+      setError(error.message);
+      return null;
+    }
+
+    setFolders((prev) => [...prev, name].sort());
+    setUploadFolder(name);
+    setNewFolderName("");
+    setShowNewFolder(false);
+    console.log(`Folder '${name}' successfully added`);
+    return name;
+  }
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
