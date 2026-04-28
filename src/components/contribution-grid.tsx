@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import { formatDate } from "../lib/utils";
-import { ContributionWeek } from "../types/graph-types";
+import { ContributionWeek, GraphLabel } from "../types/graph-types";
 import CustomMarquee from "./custom-marquee";
 
-function getColor(count: number, palette: string[]): string {
+const LEGEND_DATA: Record<GraphLabel, number[]> = {
+  contributions: [0, 1, 4, 7, 10],
+  coffees: [0, 1, 2, 3, 4],
+};
   if (count === 0) return palette[0];
   if (count <= 3) return palette[1];
   if (count <= 6) return palette[2];
@@ -17,7 +20,7 @@ type Props = {
   palette: string[];
   marquee?: boolean;
   weeks: ContributionWeek[];
-  label: string;
+  label: GraphLabel;
 };
 
 export default function ContributionGrid({
@@ -83,6 +86,24 @@ export default function ContributionGrid({
         <span className="text-[10px] uppercase tracking-widest text-neutral-400">
           More
         </span>
+      <div className="sm:flex items-center justify-between mt-2">
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] uppercase tracking-widest text-neutral-400">
+            Less
+          </span>
+          {LEGEND_DATA[label].map((count) => (
+            <div
+              key={count}
+              className={`h-2.5 w-2.5 ${getColor(count, palette, label)}`}
+            />
+          ))}
+          <span className="text-[10px] uppercase tracking-widest text-neutral-400">
+            More
+          </span>
+        </div>
+        <p className="text-[8px] uppercase tracking-widest text-neutral-400">
+          Max {max} {label} in one day
+        </p>
       </div>
 
       {tooltip && (
