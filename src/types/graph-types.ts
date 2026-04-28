@@ -1,3 +1,5 @@
+export type GraphLabel = "contributions" | "coffees";
+
 export interface ContributionDay {
   date: string;
   contributionCount: number;
