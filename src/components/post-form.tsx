@@ -365,22 +365,54 @@ export default function PostForm({ post }: PostFormProps) {
                 />
               </div>
 
+              {/* FOLDER UI */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs text-neutral-500">Folder</label>
-                <select
-                  className="border dark:border-neutral-700 px-3 py-2 rounded text-sm"
-                  value={uploadFolder}
-                  onChange={(e) => setUploadFolder(e.target.value)}
-                >
-                  {FOLDERS.map((f) => (
-                    <option key={f} value={f}>
-                      {f}
-                    </option>
-                  ))}
-                </select>
+                {showNewFolder ? (
+                  <div className="flex gap-2 items-center">
+                    <input
+                      type="text"
+                      value={newFolderName}
+                      onChange={(e) => setNewFolderName(e.target.value)}
+                      placeholder="new-folder-name"
+                      className="flex-1 border dark:border-neutral-700 px-3 py-2 rounded text-sm"
+                      autoFocus
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowNewFolder(false)}
+                      className="flex items-center px-3 py-2 rounded text-sm border dark:border-neutral-700 text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 whitespace-nowrap"
+                    >
+                      Close <X />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2 items-center">
+                    <select
+                      className="flex-1 border dark:border-neutral-700 px-3 py-2 rounded text-sm"
+                      value={uploadFolder}
+                      onChange={(e) => setUploadFolder(e.target.value)}
+                    >
+                      {folders.map((f) => (
+                        <option key={f} value={f}>
+                          {f}
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      type="button"
+                      onClick={() => setShowNewFolder(true)}
+                      className="flex items-center px-3 py-2 rounded text-sm border dark:border-neutral-700 text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 whitespace-nowrap"
+                    >
+                      New
+                      <Plus />
+                    </button>
+                  </div>
+                )}
               </div>
 
               <DropZoneInput onFileDrop={uploadImage} uploading={uploading} />
+              {error && <p className="text-red-500 text-sm">{error}</p>}
             </div>
 
             {/* Footer */}
