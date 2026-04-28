@@ -1,27 +1,24 @@
 "use client";
 import { supabase } from "@/src/supabase/client";
 import { Post, PostField } from "@/src/types/posts";
+import {
+  FileCheck,
+  FileType,
+  ImageIcon,
+  Pin,
+  PinOff,
+  Plus,
+  X,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMarkdownShortcuts } from "../hooks/use-md-shortcuts";
 import DropZoneInput from "./drop-zone";
 import Markdown from "./markdown";
-import { FileCheck, FileType, ImageIcon, Pin, PinOff, X } from "lucide-react";
 
 type PostFormProps = {
   post?: Post; // if provided = edit mode, if not = create mode
 };
-
-const FOLDERS = [
-  // Add or change folders here
-  "arduinopage",
-  "airbornwx",
-  "creativedataviz",
-  "airbornschool",
-  "rapidproject",
-  "coffestats",
-  "hysj",
-];
 
 const MD_PLACEHOLDER = `Write content in markdown syntax
 
@@ -55,7 +52,50 @@ export default function PostForm({ post }: PostFormProps) {
 
   const [uploading, setUploading] = useState(false);
   const [uploadAlt, setUploadAlt] = useState("");
-  const [uploadFolder, setUploadFolder] = useState(FOLDERS[0]);
+  const [folders, setFolders] = useState<string[]>([]);
+  const [uploadFolder, setUploadFolder] = useState("");
+  const [newFolderName, setNewFolderName] = useState("");
+  const [showNewFolder, setShowNewFolder] = useState(false);
+
+  useEffect(() => {
+    async function fetchFolders() {
+      const { data, error } = await supabase
+        .from("post_folders")
+        .select("name")
+        .order("name");
+      if (!error && data) {
+        const names = data.map((r) => r.name);
+        setFolders(names);
+        setUploadFolder(names[0] ?? "");
+        console.log(names);
+      }
+    }
+    fetchFolders();
+  }, []);
+
+  async function addFolder() {
+    const name = newFolderName
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, "");
+    if (!name || folders.includes(name)) {
+      setError("Foldername can't be blank or reused");
+      return null;
+    }
+
+    const { error } = await supabase.from("post_folders").insert({ name });
+    if (error) {
+      setError(error.message);
+      return null;
+    }
+
+    setFolders((prev) => [...prev, name].sort());
+    setUploadFolder(name);
+    setNewFolderName("");
+    setShowNewFolder(false);
+    console.log(`Folder '${name}' successfully added`);
+    return name;
+  }
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -94,6 +134,7 @@ export default function PostForm({ post }: PostFormProps) {
       return;
     }
 
+    console.log("Post successfully added!");
     router.push("/admin");
   };
 
@@ -121,6 +162,17 @@ export default function PostForm({ post }: PostFormProps) {
     setUploading(true);
     setError(null);
 
+    let folderName = uploadFolder;
+
+    if (showNewFolder) {
+      const createdFolder = await addFolder();
+      if (!createdFolder) {
+        setUploading(false);
+        return;
+      }
+      folderName = createdFolder;
+    }
+
     const ext = file.name.split(".").pop()?.toLowerCase() || "png";
     const safeExt = ext.replace(/[^a-z0-9]/g, "") || "png";
     const name = (
@@ -128,7 +180,7 @@ export default function PostForm({ post }: PostFormProps) {
     ).slice(0, 16);
 
     const folder = isEditing ? post.id : "new";
-    const path = `${uploadFolder}/${folder}/${name}.${safeExt}`;
+    const path = `${folderName}/${folder}/${name}.${safeExt}`;
 
     const { error: upErr } = await supabase.storage
       .from("posts")
@@ -322,22 +374,54 @@ export default function PostForm({ post }: PostFormProps) {
                 />
               </div>
 
+              {/* FOLDER UI */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs text-neutral-500">Folder</label>
-                <select
-                  className="border dark:border-neutral-700 px-3 py-2 rounded text-sm"
-                  value={uploadFolder}
-                  onChange={(e) => setUploadFolder(e.target.value)}
-                >
-                  {FOLDERS.map((f) => (
-                    <option key={f} value={f}>
-                      {f}
-                    </option>
-                  ))}
-                </select>
+                {showNewFolder ? (
+                  <div className="flex gap-2 items-center">
+                    <input
+                      type="text"
+                      value={newFolderName}
+                      onChange={(e) => setNewFolderName(e.target.value)}
+                      placeholder="new-folder-name"
+                      className="flex-1 border dark:border-neutral-700 px-3 py-2 rounded text-sm"
+                      autoFocus
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowNewFolder(false)}
+                      className="flex items-center px-3 py-2 rounded text-sm border dark:border-neutral-700 text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 whitespace-nowrap"
+                    >
+                      Close <X />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2 items-center">
+                    <select
+                      className="flex-1 border dark:border-neutral-700 px-3 py-2 rounded text-sm"
+                      value={uploadFolder}
+                      onChange={(e) => setUploadFolder(e.target.value)}
+                    >
+                      {folders.map((f) => (
+                        <option key={f} value={f}>
+                          {f}
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      type="button"
+                      onClick={() => setShowNewFolder(true)}
+                      className="flex items-center px-3 py-2 rounded text-sm border dark:border-neutral-700 text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 whitespace-nowrap"
+                    >
+                      New
+                      <Plus />
+                    </button>
+                  </div>
+                )}
               </div>
 
               <DropZoneInput onFileDrop={uploadImage} uploading={uploading} />
+              {error && <p className="text-red-500 text-sm">{error}</p>}
             </div>
 
             {/* Footer */}

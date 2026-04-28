@@ -45,6 +45,7 @@ export default function AdminLogin() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleLogin()}
           className="border dark:border-neutral-700 px-3 py-2 rounded text-sm"
         />
 
