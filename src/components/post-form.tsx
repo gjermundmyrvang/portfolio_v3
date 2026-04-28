@@ -1,12 +1,20 @@
 "use client";
 import { supabase } from "@/src/supabase/client";
 import { Post, PostField } from "@/src/types/posts";
+import {
+  FileCheck,
+  FileType,
+  ImageIcon,
+  Pin,
+  PinOff,
+  Plus,
+  X,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMarkdownShortcuts } from "../hooks/use-md-shortcuts";
 import DropZoneInput from "./drop-zone";
 import Markdown from "./markdown";
-import { FileCheck, FileType, ImageIcon, Pin, PinOff, X } from "lucide-react";
 
 type PostFormProps = {
   post?: Post; // if provided = edit mode, if not = create mode
@@ -126,6 +134,7 @@ export default function PostForm({ post }: PostFormProps) {
       return;
     }
 
+    console.log("Post successfully added!");
     router.push("/admin");
   };
 
