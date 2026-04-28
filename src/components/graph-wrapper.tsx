@@ -1,6 +1,6 @@
 "use client";
 
-import { ContributionWeek } from "@/src/types/graph-types";
+import { ContributionWeek, GraphLabel } from "@/src/types/graph-types";
 import { PlayCircle, StopCircle } from "lucide-react";
 import { useState } from "react";
 import ContributionGrid from "./contribution-grid";
@@ -13,7 +13,7 @@ interface Props {
   totalLabel?: string;
   autoScroll?: boolean;
   since?: Date;
-  label?: string;
+  label?: GraphLabel;
 }
 
 export default function ContributionGraphWrapper({
