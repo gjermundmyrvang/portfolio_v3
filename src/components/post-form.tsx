@@ -12,17 +12,6 @@ type PostFormProps = {
   post?: Post; // if provided = edit mode, if not = create mode
 };
 
-const FOLDERS = [
-  // Add or change folders here
-  "arduinopage",
-  "airbornwx",
-  "creativedataviz",
-  "airbornschool",
-  "rapidproject",
-  "coffestats",
-  "hysj",
-];
-
 const MD_PLACEHOLDER = `Write content in markdown syntax
 
 - Italic (CMD + I)
@@ -55,8 +44,26 @@ export default function PostForm({ post }: PostFormProps) {
 
   const [uploading, setUploading] = useState(false);
   const [uploadAlt, setUploadAlt] = useState("");
-  const [uploadFolder, setUploadFolder] = useState(FOLDERS[0]);
+  const [folders, setFolders] = useState<string[]>([]);
+  const [uploadFolder, setUploadFolder] = useState("");
+  const [newFolderName, setNewFolderName] = useState("");
+  const [showNewFolder, setShowNewFolder] = useState(false);
 
+  useEffect(() => {
+    async function fetchFolders() {
+      const { data, error } = await supabase
+        .from("post_folders")
+        .select("name")
+        .order("name");
+      if (!error && data) {
+        const names = data.map((r) => r.name);
+        setFolders(names);
+        setUploadFolder(names[0] ?? "");
+        console.log(names);
+      }
+    }
+    fetchFolders();
+  }, []);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
