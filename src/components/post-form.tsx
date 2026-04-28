@@ -153,6 +153,17 @@ export default function PostForm({ post }: PostFormProps) {
     setUploading(true);
     setError(null);
 
+    let folderName = uploadFolder;
+
+    if (showNewFolder) {
+      const createdFolder = await addFolder();
+      if (!createdFolder) {
+        setUploading(false);
+        return;
+      }
+      folderName = createdFolder;
+    }
+
     const ext = file.name.split(".").pop()?.toLowerCase() || "png";
     const safeExt = ext.replace(/[^a-z0-9]/g, "") || "png";
     const name = (
@@ -160,7 +171,7 @@ export default function PostForm({ post }: PostFormProps) {
     ).slice(0, 16);
 
     const folder = isEditing ? post.id : "new";
-    const path = `${uploadFolder}/${folder}/${name}.${safeExt}`;
+    const path = `${folderName}/${folder}/${name}.${safeExt}`;
 
     const { error: upErr } = await supabase.storage
       .from("posts")
