@@ -9,7 +9,18 @@ const LEGEND_DATA: Record<GraphLabel, number[]> = {
   contributions: [0, 1, 4, 7, 10],
   coffees: [0, 1, 2, 3, 4],
 };
+
+function getColor(count: number, palette: string[], mode: GraphLabel): string {
   if (count === 0) return palette[0];
+
+  if (mode === "coffees") {
+    if (count <= 1) return palette[1];
+    if (count <= 2) return palette[2];
+    if (count <= 3) return palette[3];
+    return palette[4];
+  }
+
+  // contributions
   if (count <= 3) return palette[1];
   if (count <= 6) return palette[2];
   if (count <= 9) return palette[3];
