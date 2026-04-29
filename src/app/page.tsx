@@ -6,6 +6,7 @@ import CoffeeGraph from "../components/coffee-graph";
 import ContributionGraph from "../components/contribution-graph";
 import Markdown from "../components/markdown";
 import PostsSection from "../components/post-section";
+import Webpages from "../components/webpages";
 
 export default function Home() {
   const filePath = path.join(process.cwd(), "public", "markdown", "about.md");
@@ -48,8 +49,10 @@ export default function Home() {
           </div>
         </div>
       </div>
+
       <Markdown content={aboutMd} />
 
+      <h2 className="text-[1.5em] font-bold">Activity</h2>
       <Suspense
         fallback={
           <div className="h-20 animate-pulse rounded-lg bg-neutral-800" />
@@ -66,7 +69,11 @@ export default function Home() {
         <ContributionGraph />
       </Suspense>
 
+      <h2 className="text-[1.5em] font-bold">Projects</h2>
       <PostsSection />
+
+      <h2 className="text-[1.5em] font-bold">Deployed Web Pages</h2>
+      <Webpages />
     </div>
   );
 }

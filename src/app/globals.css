@@ -59,6 +59,23 @@ kbd {
   display: none;
 }
 
+.scroll-container::-webkit-scrollbar {
+  height: 6px;
+  border-top: 1px solid gray;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #000;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
 @keyframes wiggle {
   0%,
   100% {
