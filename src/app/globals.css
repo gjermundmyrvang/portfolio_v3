@@ -4,8 +4,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --scrollbar-thumb: #d4d4d4;
-  --scrollbar-thumb-hover: #a3a3a3;
+  --scrollbar-thumb: #000000;
+  --scrollbar-thumb-hover: #333;
 }
 
 @theme inline {
@@ -20,8 +20,8 @@
   :root {
     --background: #111111;
     --foreground: #d7d7d7;
-    --scrollbar-thumb: #974200;
-    --scrollbar-thumb-hover: #d05a00;
+    --scrollbar-thumb: #ff4d00;
+    --scrollbar-thumb-hover: #723100;
   }
 }
 
@@ -69,11 +69,11 @@ kbd {
 }
 
 .scroll-container::-webkit-scrollbar-thumb {
-  background: #000;
+  background: var(--scrollbar-thumb);
 }
 
 .scroll-container::-webkit-scrollbar-thumb:hover {
-  background: #333;
+  background: var(--scrollbar-thumb-hover);
 }
 
 @keyframes wiggle {
