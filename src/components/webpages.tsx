@@ -16,12 +16,24 @@ const PAGES: PageComponent[] = [
     link: "https://thisweek.gjermundmyrvang.com",
   },
   {
+    title: "Tangible Project - Disturbia",
+    link: "https://disturbia.gjermundmyrvang.com",
+  },
+  {
+    title: "Aiborn Landing Page",
+    link: "https://airborn-landingpage.vercel.app/",
+  },
+  {
     title: "SVG to TSX",
     link: "https://svgtailwind.gjermundmyrvang.com/",
   },
   {
     title: "Themegenerator for Next.js",
     link: "https://themegenerator.gjermundmyrvang.com/",
+  },
+  {
+    title: "Hidden Beasts",
+    link: "https://hiddenbeasts.vercel.app/",
   },
 ];
 
