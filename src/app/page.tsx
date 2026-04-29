@@ -18,16 +18,12 @@ export default function Home() {
           <div className="flex flex-row sm:flex-col gap-4 sm:gap-2 items-center sm:items-start">
             <div className="relative group sm:hidden">
               <Image
-                src={"/pb.jpeg"}
-                width={120}
-                height={120}
+                src={"https://avatars.githubusercontent.com/u/112817355?v=4"}
+                width={180}
+                height={180}
                 alt="Profile Picture"
                 className="shadow-2xl"
               />
-              <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-white text-black text-sm px-3 py-2 rounded-2xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-                Hi! Have a nice day 🤙
-                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-white rotate-45" />
-              </div>
             </div>
             <h1 className="text-2xl sm:text-4xl font-bold">
               Gjermund Persson Myrvang
@@ -37,14 +33,15 @@ export default function Home() {
         </div>
         <div className="relative group w-full hidden sm:block">
           <Image
-            src={"/pb.jpeg"}
+            src={"https://avatars.githubusercontent.com/u/112817355?v=4"}
             width={200}
             height={200}
             alt="Profile Picture"
             className="shadow-2xl"
           />
           <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-white text-black text-sm px-3 py-2 rounded-2xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-            Hi! Have a nice day 🤙
+            Hi! Have a nice day{" "}
+            <span className="animate-wiggle inline-block">🤙</span>
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-white rotate-45" />
           </div>
         </div>
