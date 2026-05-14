@@ -7,6 +7,8 @@ import ContributionGraph from "../components/contribution-graph";
 import Markdown from "../components/markdown";
 import PostsSection from "../components/post-section";
 import Webpages from "../components/webpages";
+import Apps from "../components/apps";
+import { AppEntries } from "../lib/app-info";
 
 export default function Home() {
   const filePath = path.join(process.cwd(), "public", "markdown", "about.md");
@@ -71,6 +73,9 @@ export default function Home() {
 
       <h2 className="text-[1.5em] font-bold">Deployed Web Pages</h2>
       <Webpages />
+
+      <h2 className="text-[1.5em] font-bold">Deployed Apps</h2>
+      <Apps appEntries={AppEntries} />
     </div>
   );
 }
