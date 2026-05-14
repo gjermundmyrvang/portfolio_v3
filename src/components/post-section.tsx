@@ -10,8 +10,7 @@ export default function PostsSection() {
     return (
       <p className="text-sm text-red-500">Failed to load posts: {error}</p>
     );
-  if (loading || !posts)
-    return <p className="text-sm text-neutral-400">Loading...</p>;
+  if (loading || !posts) return <LoadingPosts />;
 
   const ongoing = posts.filter((p) => p.ongoing);
   const featured = posts.filter((p) => p.featured);
@@ -30,5 +29,16 @@ export default function PostsSection() {
         <p className="text-sm text-neutral-400">No posts yet.</p>
       )}
     </>
+  );
+}
+
+function LoadingPosts() {
+  const range = [...Array(10).keys()];
+  return (
+    <div className="flex flex-col gap-3">
+      {range.map((n) => (
+        <div key={n} className="w-fill bg-neutral-100 animate-pulse"></div>
+      ))}
+    </div>
   );
 }
