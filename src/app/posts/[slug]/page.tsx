@@ -45,6 +45,7 @@ export default function PostPage() {
     <article className="mx-auto px-4 py-10">
       <Breadcrumb
         items={[{ label: "Home", href: "/" }, { label: post.title }]}
+        postId={post.id}
       />
       <Markdown content={post.content_md} />
     </article>
