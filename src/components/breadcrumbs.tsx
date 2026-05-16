@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Home, ChevronRight } from "lucide-react";
+import { Home, ChevronRight, Heart } from "lucide-react";
+import { usePostLike } from "../hooks/usePostLikes";
 
 type BreadcrumbItem = {
   label: string;
@@ -9,13 +10,28 @@ type BreadcrumbItem = {
 type BreadcrumbProps = {
   items: BreadcrumbItem[];
   className?: string;
+  postId: string;
 };
 
-export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
+export default function Breadcrumb({
+  items,
+  className = "",
+  postId,
+}: BreadcrumbProps) {
+  const {
+    liked,
+    likeCount,
+    loading: likesLoading,
+    toggle,
+  } = usePostLike(postId);
+
   if (!items?.length) return null;
 
   return (
-    <nav aria-label="Breadcrumb" className={`flex ${className}`}>
+    <nav
+      aria-label="Breadcrumb"
+      className={`flex-col sm:flex-row items-center justify-between ${className}`}
+    >
       <ol className="inline-flex items-center gap-1 md:gap-2">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
@@ -55,6 +71,18 @@ export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
           );
         })}
       </ol>
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={toggle}
+          disabled={likesLoading}
+          className="inline-flex items-center gap-2 text-sm mt-2 hover:cursor-pointer font-bold"
+        >
+          <Heart className={liked ? "text-red-500" : "text-gray-500"} />
+          <span>{liked ? "Thanks" : "Cool"}</span>
+          <span>[{likeCount ?? 0}]</span>
+        </button>
+      </div>
     </nav>
   );
 }
