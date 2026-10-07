@@ -2,7 +2,6 @@ import fs from "fs";
 import Image from "next/image";
 import path from "path";
 import { Suspense } from "react";
-import CoffeeGraph from "../components/coffee-graph";
 import ContributionGraph from "../components/contribution-graph";
 import Markdown from "../components/markdown";
 import PostsSection from "../components/post-section";
@@ -52,14 +51,6 @@ export default function Home() {
       <Markdown content={aboutMd} />
 
       <h2 className="text-[1.5em] font-bold">Activity</h2>
-      <Suspense
-        fallback={
-          <div className="h-20 animate-pulse rounded-lg bg-neutral-800" />
-        }
-      >
-        <CoffeeGraph />
-      </Suspense>
-
       <Suspense
         fallback={
           <div className="h-20 animate-pulse rounded-lg bg-neutral-800" />
