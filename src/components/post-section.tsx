@@ -18,11 +18,11 @@ export default function PostsSection() {
 
   return (
     <>
-      {ongoing.length > 0 && (
-        <PostList posts={ongoing} title="Ongoing Projects" />
-      )}
       {featured.length > 0 && (
         <PostList posts={featured} title="Featured Projects" />
+      )}
+      {ongoing.length > 0 && (
+        <PostList posts={ongoing} title="Ongoing Projects" />
       )}
       {rest.length > 0 && <PostList posts={rest} title="More Projects" />}
       {posts.length === 0 && (
